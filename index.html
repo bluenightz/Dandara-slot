@@ -9,6 +9,14 @@
 
 <body>
 
+    <div style="clear:left; padding:5px 10px; background: #eaeaea; margin-bottom: 25px;">
+        <input type="range" name="" id="slide" min="0" max="25000" value="0" style="width:100%;">
+    </div>
+    <!-- <div style="margin-top:25px;">
+        <button id="btn_spin">Spin</button>
+        <button>Watch</button>
+    </div> -->
+
     <div class="slot-object">
         <div class="slot-wrapper">
             <div id="slot-0" class="slot">
@@ -204,17 +212,12 @@
                 </div>
             </div>
         </div>
-        <img src="assets/img/skin.png" class="slot-skin" alt="">
+        <div class="slot-skin">
+            <img src="assets/img/skin-sprite.png" alt="">
+        </div>
     </div>
 
 
-    <div style="clear:left; padding:5px 10px; background: #eaeaea;">
-        <input type="range" name="" id="slide" min="0" max="25000" value="0" style="width:100%;">
-    </div>
-    <div style="margin-top:25px;">
-        <button id="btn_spin">Spin</button>
-        <button>Watch</button>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="assets/js/main.js"></script>

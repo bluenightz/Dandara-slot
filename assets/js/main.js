@@ -28,6 +28,37 @@
     };
 
 
+    function Skin(){
+
+        var skin = $(".slot-skin img")[0];
+        var frame = 2;
+        var currentFrame = 1;
+        var width = 760;
+        var interval;
+        var _this = this;
+        var delay = 200;
+
+        this.play = function(){
+            interval = setInterval(function(){
+                _this.nextFrame();
+            }, delay);
+        }
+
+        this.nextFrame = function(){
+            if(currentFrame < 2){
+                skin.style.left = (-760 * currentFrame) + "px";
+                currentFrame += 1;
+            }else{
+                skin.style.left = '0px';
+                currentFrame = 1;
+            }
+        }
+    }
+
+    var skin = new Skin();
+    skin.play();
+
+
     function changeScale(w, h){
 
         $(".slot-item-wrapper").css({

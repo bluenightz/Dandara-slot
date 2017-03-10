@@ -5,10 +5,16 @@
         position: absolute;
         top: 0px;
         left: 0px;
+        overflow: hidden;
+        width: 760px;
+        height: 1301px;
     }
     .slot-object{
         width: 760;
         height: 1301px;
+        position: relative;
+    }
+    .slot-object img{
         position: relative;
     }
     .slot-item-wrapper {
