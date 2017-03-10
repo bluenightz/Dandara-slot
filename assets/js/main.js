@@ -1,9 +1,12 @@
+$(function(){
 
     // var slot1 = $("#slot-1");
     var position = {};
     var maxslot = 5;
     var scaleW = 103 * 1; 
     var scaleH = 134 * 1;
+    var slotTweens = [];
+    var comma = document.querySelector("#slot-comma");
 
 
     var slot0position = {
@@ -27,6 +30,8 @@
         "slot": $("#slot-4")
     };
 
+    var skin = new Skin();
+
 
     function Skin(){
 
@@ -37,6 +42,7 @@
         var interval;
         var _this = this;
         var delay = 200;
+        var isPlay = false;
 
         this.play = function(){
             interval = setInterval(function(){
@@ -53,10 +59,14 @@
                 currentFrame = 1;
             }
         }
+
+        this.stopAtFrame = function( frame ){
+            clearInterval(interval);
+            skin.style.left = (-760 * frame) + "px";
+            currentFrame = frame;
+        }
     }
 
-    var skin = new Skin();
-    skin.play();
 
 
     function changeScale(w, h){
@@ -89,7 +99,7 @@
             return false;
         }
 
-        TweenMax.to(_slot, 1, {
+        return TweenMax.to(_slot, 1, {
             "y": "-" + position["pos" + value],
             "onUpdateParams": ["{self}"],
             "onUpdate": function(self) {
@@ -120,27 +130,83 @@
 
     function bindEvent() {
         document.querySelector("#slide").onchange = function() {
+            stopSlot();
             animateSlotTo(this.value);
         }
         document.querySelector("#slide").oninput = function() {
+            stopSlot();
             animateSlotTo(this.value);
         }
+        document.querySelector("#slide").onmousedown = function() {
+            skin.stopAtFrame(1);
+            skin.play();
+        }
+        document.querySelector("#stop_number").oninput = function () {
+            if (this.value.length > 5) {
+                this.value = this.value.slice(0,5); 
+            }
+        }
         $("#btn_spin").click(function(e){
-            spinslot(0);
+            if( !skin.isPlay ){
+                skin.play();
+                skin.isPlay = true;
+                setTimeout(function(){
+                    slotTweens[0] = spinslot(0);
+                }, 0);
+                setTimeout(function(){
+                    slotTweens[1] = spinslot(1);
+                }, 100);
+                setTimeout(function(){
+                    slotTweens[2] = spinslot(2);
+                }, 200);
+                setTimeout(function(){
+                    slotTweens[3] = spinslot(3);
+                }, 300);
+                setTimeout(function(){
+                    slotTweens[4] = spinslot(4);
+                }, 400);
+            }
+        });
+        $("#btn_stop").click(function(e){
+            stopSlot();
         });
     }
 
     function spinslot(column){
-        TweenMax.to( slot0position.slot[0], 1, {
-            "top": "-900px",
+        var obj = eval("slot" + column + "position");
+        obj.y = 0;
+        obj.slot.css("top", 0);
+
+        TweenMax.to(comma, 1, {
+            "top": "-" + scaleH + "px"
+        });
+
+        var t = TweenMax.to( obj, 1, {
+            "y": "-" + (scaleH * 9) + "px",
+            "repeat": -1,
+            "ease": Linear.easeNone,
             "onUpdate": function(self){
-                // var _top = Number(self.target.style.top.toString().replace("px", ""));
-                // if( _top <= -900 ){
-                //     self.target.style.top = "0px";
-                // }
+                self.target.slot.css("top", self.target.y);
             },
             "onUpdateParams": ["{self}"]
         });
+        return t;
+    }
+
+    function stopSlot(){
+        skin.isPlay = false;
+        // for(var i = 0; i < slotTweens.length; ++i){
+        //     if( slotTweens[i].target ){
+        //         eval("slot" + i + "position").y = slotTweens[i].target.slot.css('top');
+        //         slotTweens[i].pause();
+        //     }
+        // }
+        
+        // stopSlot();
+        animateSlotTo( Number(document.getElementById("stop_number").value) );
+        setTimeout(function(){
+            skin.stopAtFrame(1);
+        }, 1000);
     }
 
     function makePositionObj() {
@@ -150,7 +216,6 @@
     }
 
     function animateSlotTo(number) {
-        var comma = document.querySelector("#slot-comma");
         if (number.toString().length > 3) {
             TweenMax.to(comma, 1, {
                 "top": "-" + scaleH + "px"
@@ -165,10 +230,12 @@
 
         for (var x = 0; x < target.length; ++x) {
 
-            animateOneSlot(x, target[x]);
+            slotTweens[x] = animateOneSlot(x, target[x]);
 
         }
     }
 
     init();
-    
+
+
+});

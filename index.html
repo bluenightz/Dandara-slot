@@ -9,13 +9,21 @@
 
 <body>
 
-    <div style="clear:left; padding:5px 10px; background: #eaeaea; margin-bottom: 25px;">
-        <input type="range" name="" id="slide" min="0" max="25000" value="0" style="width:100%;">
+    <div class="slot-control">
+        <div style="clear:left; padding:5px 10px; background: #eaeaea; margin-bottom: 25px;">
+            <input type="range" name="" id="slide" min="0" max="25000" value="0" style="width:100%;">
+        </div>
+
+        <div class="divide"></div>
+
+        <button id="btn_spin" class="btn">หมุน</button>
+
+        <div class="divide"></div>
+        
+        <strong>ใส่ตัวเลขแล้วกดปุ่มหยุด</strong>
+        <input type="number" name="" id="stop_number" max="25000"><button id="btn_stop" class="btn">หยุด</button>
+            <!-- <button>Watch</button> -->
     </div>
-    <!-- <div style="margin-top:25px;">
-        <button id="btn_spin">Spin</button>
-        <button>Watch</button>
-    </div> -->
 
     <div class="slot-object">
         <div class="slot-wrapper">
