@@ -219,7 +219,7 @@ $(function(){
         $("#btn_watch_device").click(function(e){
             stopWatchDevice();
             var ip_server = 'http://' + $("#device_ip").val().trim();
-            ip_server = 'test.json';
+            ip_server = 'http://192.168.3.29:8888/dandara/www/test.php';
 
             if( !ip_server ){
                 alert('ใส่ ip server ก่อนใช้งาน');
@@ -235,7 +235,8 @@ $(function(){
                 function(){
                     $.get({
                         url: ip_server,
-                        cache: false
+                        cache: false,
+                        dataType: 'json'
                     }).then(function( data ){
                         if( data.point != prevWatchPoint ){
                             // var value = Number( data.point) ;
