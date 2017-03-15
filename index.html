@@ -21,11 +21,16 @@
         <div class="divide"></div>
         
         <strong>ใส่ตัวเลขแล้วกดปุ่มหยุด</strong>
-        <input type="number" name="" id="stop_number" max="25000"><button id="btn_stop" class="btn">หยุด</button>
+        <input type="number" name="" id="stop_number" max="25000"><button id="btn_stop" class="btn">หมุนไปที่เลข</button>
             <!-- <button>Watch</button> -->
+
+
+        <div class="divide"></div>
+        <input type="text" name="" id="device_ip" placeholder="ip เครื่อง server"> <br> <span style="font-size: 12px ; color: #666;">example : 192.168.0.0</span> <br><br>
+        <button class="btn" id="btn_watch_device">รับค่าจากอุปกรณ์</button>
     </div>
 
-    <div class="slot-object">
+    <div class="slot-object" >
         <div class="slot-wrapper">
             <div id="slot-0" class="slot">
                 <div class="slot-item-wrapper">
@@ -220,8 +225,14 @@
                 </div>
             </div>
         </div>
-        <div class="slot-skin">
+        <div class="slot-skin" id="skin">
             <img src="assets/img/skin-sprite.png" alt="">
+        </div>
+        <div class="slot-skin slot-skin-light" id="skin-light">
+            <img src="assets/img/skin-light-sprite-compress.png" alt="">
+        </div>
+        <div class="slot-skin slot-skin-circle" id="skin-circle">
+            <img src="assets/img/skin-circle.png" alt="">
         </div>
     </div>
 

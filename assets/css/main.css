@@ -37,6 +37,10 @@
         width: 760px;
         height: 1301px;
     }
+    .slot-skin-light {
+        left: -2px;
+        top: -1px;
+    }
     .slot-object{
         width: 760;
         height: 1301px;
